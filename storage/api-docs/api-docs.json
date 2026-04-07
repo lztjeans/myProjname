@@ -1,0 +1,366 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "我的 APIs",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "本地開發伺服器"
+        }
+    ],
+    "paths": {
+        "/cheatsheets/list": {
+            "get": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "取得所有指令清單",
+                "operationId": "6a32ad8ca1161f92fcb054a7be4a91af",
+                "responses": {
+                    "200": {
+                        "description": "成功回傳清單"
+                    }
+                }
+            }
+        },
+        "/cheatsheets/create": {
+            "post": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "新增一筆指令",
+                "operationId": "a956b811bf980d9f528f3dede09e886d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "學習 Laravel Swagger"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "建立成功"
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/cheatsheets/{cheatsheet}": {
+            "get": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "取得單一指令細節",
+                "description": "$.ajax({\n    url: '/api/cheatsheets/' + id,\n    type: 'POST',\n    data: { _method: 'DELETE' },\n    headers: {\n        'X-Creater-Name': 'JohnDoe' // 在這裡手動加入 Header\n    },\n    success: function(res) {\n        console.log('刪除成功');\n    }\n});",
+                "operationId": "df696af2a507aad389ac79ab5ca0d120",
+                "parameters": [
+                    {
+                        "name": "cheatsheet",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "404": {
+                        "description": "找不到項目"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "更新指令",
+                "operationId": "4b48fe9acfa3ddac86def850977b0b0e",
+                "parameters": [
+                    {
+                        "name": "cheatsheet",
+                        "in": "path",
+                        "description": "指令的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "狀態更新成功"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    }
+                }
+            }
+        },
+        "/api/cheatsheets/{id}/{creater}": {
+            "delete": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "刪除指定的指令",
+                "operationId": "0bae56fce889dd872fbed5ecf95fdd07",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "指令的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "creater",
+                        "in": "path",
+                        "description": "建立者名稱",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除成功"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    },
+                    "403": {
+                        "description": "權限不足"
+                    }
+                }
+            }
+        },
+        "/api/cheatsheets/{id}": {
+            "delete": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "刪除指定的指令",
+                "operationId": "43c465483211c977952a6c7a6782f1e5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "指令的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除成功"
+                    },
+                    "403": {
+                        "description": "權限不足：你不是建立者"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/cheatsheetsHeader/{id}": {
+            "delete": {
+                "tags": [
+                    "Cheatsheets"
+                ],
+                "summary": "刪除指定的指令",
+                "operationId": "3e07742650f48a03a9fe94fcb0d94e49",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "指令的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "X-Creater-Name",
+                        "in": "header",
+                        "description": "建立者名稱",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除成功"
+                    },
+                    "400": {
+                        "description": "缺少必要的 Header"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    }
+                }
+            }
+        },
+        "/api/todos": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "取得所有待辦事項清單",
+                "operationId": "dd687d49d7f86d473ce56a7806776fc4",
+                "responses": {
+                    "200": {
+                        "description": "成功回傳清單"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "新增一筆待辦事項",
+                "operationId": "6f5da079c2dace66df52625276205a32",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "學習 Laravel Swagger"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "建立成功"
+                    },
+                    "422": {
+                        "description": "驗證錯誤"
+                    }
+                }
+            }
+        },
+        "/api/todos/{todo}": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "取得單一待辦事項細節",
+                "operationId": "de852126e2655370ac90ca91baae44ea",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功"
+                    },
+                    "404": {
+                        "description": "找不到項目"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "刪除指定的待辦事項",
+                "operationId": "6c5c891e96a4c8e36a743b73cbb71c7b",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "待辦事項的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "刪除成功"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "切換待辦事項完成狀態",
+                "operationId": "a384dd0956337970a5948d6d68a8ae9f",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "待辦事項的 ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "狀態更新成功"
+                    },
+                    "404": {
+                        "description": "找不到該項目"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cheatsheets",
+            "description": "Cheatsheets"
+        },
+        {
+            "name": "Todos",
+            "description": "Todos"
+        }
+    ]
+}
