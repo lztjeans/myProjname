@@ -19,4 +19,6 @@
                 onclick="window.history.back()">返回列表</button>
         </div>
     </form>
+    {{-- 引用特定的 JS 檔案 --}}
+    @vite(['resources/js/cheatsheet.js'])
 @endsection
