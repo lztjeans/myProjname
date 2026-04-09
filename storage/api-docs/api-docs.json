@@ -25,13 +25,13 @@
                 }
             }
         },
-        "/cheatsheets/create": {
+        "/api/cheatsheets/create": {
             "post": {
                 "tags": [
                     "Cheatsheets"
                 ],
                 "summary": "新增一筆指令",
-                "operationId": "a956b811bf980d9f528f3dede09e886d",
+                "operationId": "8915f0e625aae82a9b23967d91402674",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -64,7 +64,7 @@
                     "Cheatsheets"
                 ],
                 "summary": "取得單一指令細節",
-                "description": "$.ajax({\n    url: '/api/cheatsheets/' + id,\n    type: 'POST',\n    data: { _method: 'DELETE' },\n    headers: {\n        'X-Creater-Name': 'JohnDoe' // 在這裡手動加入 Header\n    },\n    success: function(res) {\n        console.log('刪除成功');\n    }\n});",
+                "description": "$.ajax({\n        url: '/api/cheatsheets/' + id,\n        type: 'POST',\n        data: { _method: 'DELETE' },\n        headers: {\n            'X-Creater-Name': 'JohnDoe' // 在這裡手動加入 Header\n        },\n        success: function(res) {\n            console.log('刪除成功');\n        }\n    });",
                 "operationId": "df696af2a507aad389ac79ab5ca0d120",
                 "parameters": [
                     {
@@ -85,12 +85,12 @@
                     }
                 }
             },
-            "patch": {
+            "put": {
                 "tags": [
                     "Cheatsheets"
                 ],
                 "summary": "更新指令",
-                "operationId": "4b48fe9acfa3ddac86def850977b0b0e",
+                "operationId": "76efdef1a2ff232ed467ad545e283a65",
                 "parameters": [
                     {
                         "name": "cheatsheet",
@@ -150,42 +150,6 @@
                         "description": "權限不足"
                     }
                 }
-            }
-        },
-        "/api/cheatsheets/{id}": {
-            "delete": {
-                "tags": [
-                    "Cheatsheets"
-                ],
-                "summary": "刪除指定的指令",
-                "operationId": "43c465483211c977952a6c7a6782f1e5",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "指令的 ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "刪除成功"
-                    },
-                    "403": {
-                        "description": "權限不足：你不是建立者"
-                    },
-                    "404": {
-                        "description": "找不到該項目"
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
             }
         },
         "/api/cheatsheetsHeader/{id}": {

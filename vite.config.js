@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 
+//D:\Repos\myProjname\resources\js\cheatsheet.js
 export default defineConfig({
     plugins: [
         laravel({
